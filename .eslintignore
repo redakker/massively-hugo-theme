@@ -1,0 +1,33 @@
+# Minified files
+*.min.js
+
+# Third-party libraries
+static/assets/js/jquery*.js
+static/assets/js/breakpoints*.js
+static/assets/js/browser*.js
+
+# Build output
+public/
+dist/
+build/
+
+# Node modules
+node_modules/
+
+# Generated files
+*.generated.js
+
+# Vendor files
+vendor/
+vendors/
+
+# Config files that don't need linting (we'll lint these separately if needed)
+# tailwind.config.js
+# postcss.config.js
+
+# Legacy theme files with many style violations (can be fixed gradually)
+static/assets/js/main.js
+static/assets/js/util.js
+
+# Hugo generated files
+resources/

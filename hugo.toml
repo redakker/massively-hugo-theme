@@ -1,7 +1,6 @@
 baseURL = 'https://example.org/'
 languageCode = 'en-us'
 title = 'Massively'
-themesDir = ""
 disableKinds = ['taxonomy', 'term']
 
 [params]
@@ -26,6 +25,22 @@ disableKinds = ['taxonomy', 'term']
     [markup.goldmark.renderer]
       unsafe = true
 
+[build]
+  [build.buildStats]
+    enable = true
+  [[build.cachebusters]]
+    source = "assets/watching/hugo_stats\\.json"
+    target = "styles\\.css"
+  [[build.cachebusters]]
+    source = "(postcss|tailwind)\\.config\\.js"
+    target = "css"
+  [[build.cachebusters]]
+    source = "assets/.*\\.(js|ts|jsx|tsx)"
+    target = "js"
+  [[build.cachebusters]]
+    source = "assets/.*\\.(.*)$"
+    target = "$1"
+
 [menu]
   [[menu.main]]
     identifier = "home"
@@ -42,3 +57,18 @@ disableKinds = ['taxonomy', 'term']
     name = "About"
     url = "/about/"
     weight = 3
+  [[menu.main]]
+    identifier = "tailwind-demo"
+    name = "Tailwind Demo"
+    url = "/tailwind-demo/"
+    weight = 4
+  [[menu.main]]
+    identifier = "eslint-demo"
+    name = "ESLint Demo"
+    url = "/eslint-demo/"
+    weight = 5
+  [[menu.main]]
+    identifier = "prettier-demo"
+    name = "Prettier Demo"
+    url = "/prettier-demo/"
+    weight = 6

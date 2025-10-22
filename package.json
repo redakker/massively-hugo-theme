@@ -1,0 +1,45 @@
+{
+  "name": "massively-hugo-theme",
+  "version": "1.0.0",
+  "description": "A Hugo theme with Tailwind CSS integration",
+  "main": "index.js",
+  "scripts": {
+    "build": "hugo",
+    "dev": "hugo server -D",
+    "build-css": "postcss assets/css/tailwind.css -o static/assets/css/tailwind.css",
+    "watch-css": "postcss assets/css/tailwind.css -o static/assets/css/tailwind.css --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:js": "eslint \"static/assets/js/demo-eslint.js\"",
+    "lint:js:fix": "eslint \"static/assets/js/demo-eslint.js\" --fix",
+    "lint:legacy": "eslint \"static/assets/js/main.js\" \"static/assets/js/util.js\"",
+    "lint:legacy:fix": "eslint \"static/assets/js/main.js\" \"static/assets/js/util.js\" --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "format:js": "prettier --write \"static/assets/js/**/*.js\" \"*.config.js\"",
+    "format:md": "prettier --write \"**/*.md\"",
+    "format:json": "prettier --write \"**/*.json\""
+  },
+  "keywords": [
+    "hugo",
+    "theme",
+    "tailwind",
+    "css"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.3.6",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "^3.0.3",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1"
+  }
+}

@@ -1,8 +1,8 @@
 ---
-title: "About"
+title: 'About'
 date: 2024-04-25
 draft: false
-description: "Learn more about this site"
+description: 'Learn more about this site'
 ---
 
 This is a generic page converted from the original HTML5 UP Massively template. This page demonstrates how to create standalone pages in Hugo.

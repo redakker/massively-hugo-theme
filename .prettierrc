@@ -1,0 +1,60 @@
+{
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "arrowParens": "avoid",
+  "endOfLine": "lf",
+  "overrides": [
+    {
+      "files": ["*.js", "*.jsx"],
+      "options": {
+        "tabWidth": 4,
+        "useTabs": true,
+        "semi": true
+      }
+    },
+    {
+      "files": ["*.json", "*.jsonc"],
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    },
+    {
+      "files": ["*.md"],
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false,
+        "printWidth": 100,
+        "proseWrap": "preserve"
+      }
+    },
+    {
+      "files": ["*.html"],
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false,
+        "printWidth": 120
+      }
+    },
+    {
+      "files": ["*.css", "*.scss"],
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    },
+    {
+      "files": ["*.toml"],
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    }
+  ]
+}

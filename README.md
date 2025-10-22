@@ -12,6 +12,8 @@ A Hugo static site generator implementation of the [Massively](https://html5up.n
 - **Responsive Design**: Fully responsive HTML5/CSS3 design that works on all devices
 - **Clean Blog Layout**: Featured post section with grid-based post listing
 - **Hugo Powered**: Static site generation with Hugo's powerful templating system
+- **Tailwind CSS**: Modern utility-first CSS framework integrated with Hugo Pipes
+- **PostCSS Processing**: Automatic vendor prefixing and CSS optimization
 - **SEO Friendly**: Proper meta tags and semantic HTML structure
 - **Social Media Ready**: Built-in social media link configuration
 - **Contact Form**: Ready-to-use contact form layout
@@ -23,12 +25,14 @@ A Hugo static site generator implementation of the [Massively](https://html5up.n
 Before running this project, ensure you have:
 
 - [Hugo Extended](https://gohugo.io/installation/) (v0.100.0 or later)
+- [Node.js](https://nodejs.org/) (v16.0 or later) - for Tailwind CSS processing
 - Git (for version control)
 - A text editor or IDE
 
 ## 🛠️ Installation
 
 1. **Clone or download this repository**
+
    ```bash
    git clone <repository-url>
    cd massively-hugo
@@ -39,12 +43,19 @@ Before running this project, ensure you have:
    - **macOS**: `brew install hugo`
    - **Linux**: `snap install hugo` or download binary
 
-3. **Start the development server**
+3. **Install Node.js dependencies** (for Tailwind CSS)
+
+   ```bash
+   npm install
+   ```
+
+4. **Start the development server**
+
    ```bash
    hugo server
    ```
 
-4. **Open your browser** and navigate to `http://localhost:1313`
+5. **Open your browser** and navigate to `http://localhost:1313`
 
 ## 📁 Project Structure
 
@@ -74,19 +85,21 @@ massively-hugo/
 ### Adding a New Blog Post
 
 1. Create a new Markdown file in the `content/posts/` directory:
+
    ```bash
    hugo new posts/my-new-post.md
    ```
 
 2. Edit the frontmatter and content:
+
    ```markdown
    ---
-   title: "My Awesome Blog Post"
+   title: 'My Awesome Blog Post'
    date: 2024-10-22
    draft: false
-   description: "A brief description of your post"
-   image: "images/my-post-image.jpg"           # Optional: Post thumbnail
-   featured_image: "images/my-featured.jpg"    # Optional: For featured posts
+   description: 'A brief description of your post'
+   image: 'images/my-post-image.jpg' # Optional: Post thumbnail
+   featured_image: 'images/my-featured.jpg' # Optional: For featured posts
    ---
 
    Your post content goes here in **Markdown** format.
@@ -95,6 +108,7 @@ massively-hugo/
 ### Adding a New Page
 
 1. Create a new Markdown file in the `content/` directory:
+
    ```bash
    hugo new about.md
    ```
@@ -113,12 +127,14 @@ massively-hugo/
 The site is configured through `hugo.toml`. Key configuration options:
 
 ### Basic Site Settings
+
 ```toml
 baseURL = 'https://your-domain.com/'
 title = 'Your Site Title'
 ```
 
 ### Social Media Links
+
 ```toml
 [params.social]
   twitter = "https://twitter.com/yourusername"
@@ -128,6 +144,7 @@ title = 'Your Site Title'
 ```
 
 ### Contact Information
+
 ```toml
 [params.contact]
   address = "Your Address<br />City, State ZIP"
@@ -136,6 +153,7 @@ title = 'Your Site Title'
 ```
 
 ### Navigation Menu
+
 ```toml
 [[menu.main]]
   name = "Menu Item"
@@ -145,23 +163,161 @@ title = 'Your Site Title'
 
 ## 🎨 Customization
 
-### Styling
+### Tailwind CSS Integration
+
+This theme now includes **Tailwind CSS** for rapid UI development:
+
+- **Tailwind Classes**: Use any Tailwind utility classes in your templates and content
+- **Automatic Processing**: Tailwind is processed through Hugo Pipes with PostCSS
+- **Production Optimization**: CSS is automatically purged and minified for production builds
+- **Hot Reload**: Changes to Tailwind classes are reflected immediately during development
+
+#### Using Tailwind Classes
+
+You can use Tailwind classes directly in your templates:
+
+```html
+<div class="max-w-4xl mx-auto">
+  <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Welcome to Your Hugo Site</h1>
+  <p class="text-lg text-gray-600 leading-relaxed">
+    This paragraph uses Tailwind classes for typography and spacing.
+  </p>
+</div>
+```
+
+Or in your Markdown content (with `unsafe = true` in hugo.toml):
+
+```markdown
+<div class="bg-blue-100 p-6 rounded-lg">
+  <h3 class="text-blue-800 text-xl font-semibold mb-2">Info Box</h3>
+  <p class="text-blue-600">This is a styled info box using Tailwind classes.</p>
+</div>
+```
+
+#### Customizing Tailwind
+
+- **Config File**: Edit `tailwind.config.js` to customize your design system
+- **Main CSS File**: `assets/css/tailwind.css` contains the Tailwind directives
+- **PostCSS Config**: `postcss.config.js` handles processing and autoprefixing
+
+### ESLint Integration
+
+This theme includes **ESLint** for JavaScript code quality and consistency:
+
+- **Automatic Error Detection**: Catches common JavaScript errors and style issues
+- **Code Formatting**: Enforces consistent coding standards across JavaScript files
+- **VS Code Integration**: Automatic linting and fixing within your editor
+- **Configurable Rules**: Customizable rules via `.eslintrc.js`
+
+#### Using ESLint
+
+**Lint JavaScript files:**
+
+```bash
+npm run lint:js          # Lint demo and new JS files
+npm run lint:js:fix      # Auto-fix issues where possible
+npm run lint:legacy      # Lint legacy theme files (many issues)
+npm run lint             # Lint all files in project
+```
+
+**ESLint Configuration:**
+
+- **Config File**: `.eslintrc.js` - Main ESLint configuration
+- **Ignore File**: `.eslintignore` - Files to exclude from linting
+- **VS Code Settings**: `.vscode/settings.json` - Editor integration
+
+**Creating New JavaScript Files:**
+
+1. Add your JavaScript files to `static/assets/js/`
+2. Follow the coding standards shown in `demo-eslint.js`
+3. Run `npm run lint:js` to check for issues
+4. Use `npm run lint:js:fix` to auto-fix formatting
+
+**Example of ESLint-compliant code:**
+
+```javascript
+const MyModule = {
+  init() {
+    console.log('Module initialized');
+    this.setupEventListeners();
+  },
+
+  setupEventListeners() {
+    const buttons = document.querySelectorAll('.my-button');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', event => {
+        this.handleClick(event);
+      });
+    });
+  },
+};
+```
+
+### Prettier Integration
+
+This theme includes **Prettier** for automatic code formatting:
+
+- **Format on Save**: Automatically formats code when you save files in VS Code
+- **Consistent Style**: Enforces consistent formatting across the entire project
+- **Multi-Language**: Supports JavaScript, JSON, Markdown, HTML, CSS, and more
+- **ESLint Integration**: Works seamlessly with ESLint without conflicts
+
+#### Using Prettier
+
+**Format code:**
+
+```bash
+npm run format              # Format all files
+npm run format:check        # Check if files are formatted
+npm run format:js           # Format only JavaScript files
+npm run format:md           # Format only Markdown files
+npm run format:json         # Format only JSON files
+```
+
+**Prettier Configuration:**
+
+- **Config File**: `.prettierrc` - Main Prettier configuration with language-specific overrides
+- **Ignore File**: `.prettierignore` - Files to exclude from formatting
+- **VS Code Integration**: Automatic formatting on save enabled
+
+**Language-Specific Settings:**
+
+- **JavaScript**: Uses tabs with 4-space width (matches theme style)
+- **JSON/HTML/CSS/Markdown**: Uses 2 spaces for indentation
+- **All Languages**: Enforces semicolons and single quotes where applicable
+
+#### VS Code Integration
+
+When you open this project in VS Code:
+
+1. **Prettier Extension**: Automatically recommended and configured
+2. **Format on Save**: Enabled for all supported file types
+3. **ESLint + Prettier**: Both work together seamlessly
+4. **Real-time Formatting**: See changes as you work
+
+### Original Theme Styling
+
 - Main SASS files are located in `static/assets/sass/`
 - Compile SASS to CSS using your preferred method
 - CSS files are in `static/assets/css/`
+- Both Tailwind and original styles work together
 
 ### Layout Modifications
+
 - Edit templates in the `layouts/` directory
 - Main layouts: `baseof.html`, `list.html`, `single.html`
 - Partials: `nav.html`, `footer.html`, `scripts.html`
 
 ### Adding Custom JavaScript
+
 - Add JS files to `static/assets/js/`
 - Reference them in `layouts/partials/scripts.html`
 
 ## 🚀 Deployment
 
 ### Build for Production
+
 ```bash
 hugo --minify
 ```
@@ -169,19 +325,23 @@ hugo --minify
 ### Popular Deployment Options
 
 **Netlify:**
+
 1. Connect your Git repository
 2. Set build command: `hugo --minify`
 3. Set publish directory: `public`
 
 **GitHub Pages:**
+
 1. Use GitHub Actions with Hugo
 2. Deploy the `public` folder
 
 **Vercel:**
+
 1. Import your repository
 2. Vercel auto-detects Hugo projects
 
 **Manual Server:**
+
 1. Run `hugo --minify`
 2. Upload the `public/` folder to your web server
 

@@ -5,6 +5,15 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		{{ if .Description }}<meta name="description" content="{{ .Description }}" />{{ else }}<meta name="description" content="{{ .Site.Params.description }}" />{{ end }}
+
+		<!-- Tailwind CSS -->
+		{{ $tailwind := resources.Get "css/tailwind.css" | css.PostCSS }}
+		{{ if hugo.IsProduction }}
+			{{ $tailwind = $tailwind | minify | fingerprint }}
+		{{ end }}
+		<link rel="stylesheet" href="{{ $tailwind.RelPermalink }}">
+
+		<!-- Original theme styles -->
 		<link rel="stylesheet" href="{{ "assets/css/main.css" | relURL }}" />
 		<noscript><link rel="stylesheet" href="{{ "assets/css/noscript.css" | relURL }}" /></noscript>
 	</head>
