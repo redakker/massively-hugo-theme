@@ -1,0 +1,23 @@
+<nav id="nav">
+	<ul class="links">
+		{{ range .Site.Menus.main }}
+		<li{{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }} class="active"{{ end }}>
+			<a href="{{ .URL | relURL }}">{{ .Name }}</a>
+		</li>
+		{{ end }}
+	</ul>
+	<ul class="icons">
+		{{ with .Site.Params.social.twitter }}
+		<li><a href="{{ . }}" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+		{{ end }}
+		{{ with .Site.Params.social.facebook }}
+		<li><a href="{{ . }}" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+		{{ end }}
+		{{ with .Site.Params.social.instagram }}
+		<li><a href="{{ . }}" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+		{{ end }}
+		{{ with .Site.Params.social.github }}
+		<li><a href="{{ . }}" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+		{{ end }}
+	</ul>
+</nav>

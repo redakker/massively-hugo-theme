@@ -1,0 +1,18 @@
+{{ define "main" }}
+	<!-- Post -->
+		<section class="post">
+			<header class="major">
+				<span class="date">{{ .Date.Format "January 2, 2006" }}</span>
+				<h1>{{ .Title | safeHTML }}</h1>
+				{{ if .Summary }}
+				<p>{{ .Summary | safeHTML }}</p>
+				{{ end }}
+			</header>
+			{{ if .Params.featured_image }}
+			<div class="image main"><img src="{{ .Params.featured_image | relURL }}" alt="" /></div>
+			{{ end }}
+			<div class="content">
+				{{ .Content }}
+			</div>
+		</section>
+{{ end }}

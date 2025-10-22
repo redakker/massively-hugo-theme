@@ -1,0 +1,63 @@
+{{ define "main" }}
+	{{ $posts := where .Site.RegularPages "Type" "posts" }}
+	{{ $featuredPost := index $posts 0 }}
+
+	{{ if $featuredPost }}
+	<!-- Featured Post -->
+		<article class="post featured">
+			<header class="major">
+				<span class="date">{{ $featuredPost.Date.Format "January 2, 2006" }}</span>
+				<h2><a href="{{ $featuredPost.Permalink }}">{{ $featuredPost.Title | safeHTML }}</a></h2>
+				<p>{{ $featuredPost.Summary | safeHTML }}</p>
+			</header>
+			{{ if $featuredPost.Params.featured_image }}
+			<a href="{{ $featuredPost.Permalink }}" class="image main"><img src="{{ $featuredPost.Params.featured_image | relURL }}" alt="" /></a>
+			{{ end }}
+			<ul class="actions special">
+				<li><a href="{{ $featuredPost.Permalink }}" class="button large">Full Story</a></li>
+			</ul>
+		</article>
+	{{ end }}
+
+	<!-- Posts -->
+		<section class="posts">
+			{{ range after 1 $posts }}
+			<article>
+				<header>
+					<span class="date">{{ .Date.Format "January 2, 2006" }}</span>
+					<h2><a href="{{ .Permalink }}">{{ .Title | safeHTML }}</a></h2>
+				</header>
+				{{ if .Params.image }}
+				<a href="{{ .Permalink }}" class="image fit"><img src="{{ .Params.image | relURL }}" alt="" /></a>
+				{{ end }}
+				<p>{{ .Summary | safeHTML }}</p>
+				<ul class="actions special">
+					<li><a href="{{ .Permalink }}" class="button">Full Story</a></li>
+				</ul>
+			</article>
+			{{ end }}
+		</section>
+
+	<!-- Pagination -->
+		{{ if .Paginator }}
+		<footer>
+			<div class="pagination">
+				{{ if .Paginator.HasPrev }}
+				<a href="{{ .Paginator.Prev.URL }}" class="previous">Prev</a>
+				{{ end }}
+
+				{{ range .Paginator.Pagers }}
+				{{ if eq . $.Paginator }}
+				<a href="{{ .URL }}" class="page active">{{ .PageNumber }}</a>
+				{{ else }}
+				<a href="{{ .URL }}" class="page">{{ .PageNumber }}</a>
+				{{ end }}
+				{{ end }}
+
+				{{ if .Paginator.HasNext }}
+				<a href="{{ .Paginator.Next.URL }}" class="next">Next</a>
+				{{ end }}
+			</div>
+		</footer>
+		{{ end }}
+{{ end }}

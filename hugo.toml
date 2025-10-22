@@ -1,0 +1,44 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Massively'
+themesDir = ""
+disableKinds = ['taxonomy', 'term']
+
+[params]
+  description = "A free, fully responsive HTML5 + CSS3 site template designed by @ajlkn for HTML5 UP"
+  author = "HTML5 UP"
+
+  # Social media links
+  [params.social]
+    twitter = "#"
+    facebook = "#"
+    instagram = "#"
+    github = "#"
+
+  # Contact information
+  [params.contact]
+    address = "1234 Somewhere Road #87257<br />Nashville, TN 00000-0000"
+    phone = "(000) 000-0000"
+    email = "info@untitled.tld"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts/"
+    weight = 2
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 3
